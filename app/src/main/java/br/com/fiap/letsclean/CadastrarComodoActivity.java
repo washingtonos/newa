@@ -21,9 +21,9 @@ import br.com.fiap.letsclean.entity.Comodo;
 
 public class CadastrarComodoActivity extends AppCompatActivity {
 
-    String idUsuario;
-    //String idGrupo;
-    TextInputLayout txt_input_nomeComodo;
+    private String userId;
+    private Long grupoId, userId2;
+    private TextInputLayout txt_input_nomeComodo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +35,9 @@ public class CadastrarComodoActivity extends AppCompatActivity {
         //capturar extras de MenuActivity E Criando Comodo
         Bundle extras = getIntent().getExtras();
         if(extras!=null){
-            //idGrupo = extras.getString("idGrupo");
-            idUsuario = extras.getString("idUser");
+            userId = extras.getString("userId");
+            userId2 = extras.getLong("userId2");
+            grupoId = extras.getLong("grupoId");
         }
     }
 
@@ -61,8 +62,8 @@ public class CadastrarComodoActivity extends AppCompatActivity {
         if(validateNome()){
             Comodo comodo = new Comodo();
             comodo.setNome(txt_input_nomeComodo.getEditText().getText().toString());
-            comodo.setIdUsuario(idUsuario);
-          //  comodo.setIdGrupo(idGrupo);
+            comodo.setUserId(userId2);
+            comodo.setGrupoId(grupoId);
 
             // Recuperar informações de outra activity (Senha)
             CadastrarComodoActivity.CadastraCadastrarTask task = new CadastrarComodoActivity.CadastraCadastrarTask();
@@ -88,8 +89,8 @@ public class CadastrarComodoActivity extends AppCompatActivity {
 
                 JSONObject jsonParamsGrupo = new JSONObject();
                 jsonParamsGrupo.put("nome",comodos[0].getNome());
-                jsonParamsGrupo.put("id_user", comodos[0].getIdUsuario());
-                //jsonParamsGrupo.put("id_grupo", comodos[0].getIdUsuario());
+                jsonParamsGrupo.put("userId", comodos[0].getUserId());
+                jsonParamsGrupo.put("grupoId",comodos[0].getGrupoId().toString());
 
                 OutputStreamWriter osw = new OutputStreamWriter(connection.getOutputStream());
                 osw.write(jsonParamsGrupo.toString());
@@ -134,6 +135,8 @@ public class CadastrarComodoActivity extends AppCompatActivity {
     private void openGrupo(DialogInterface dialog) {
         dialog.dismiss();
         Intent intent = new Intent(CadastrarComodoActivity.this, ComodoActivity.class);
+        intent.putExtra("userId",userId);
+        intent.putExtra("grupoId", grupoId);
         startActivity(intent);
     }
 }

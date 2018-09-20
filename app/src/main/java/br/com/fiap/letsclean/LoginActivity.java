@@ -25,7 +25,8 @@ import br.com.fiap.letsclean.entity.Usuario;
 
 public class LoginActivity extends Activity {
 
-    TextInputLayout txt_input_emailLogin, txt_input_senhaLogin;
+    private Long admUserL,grupoIdL;
+    private TextInputLayout txt_input_emailLogin, txt_input_senhaLogin;
     private boolean userEtIsEmpty;
     private boolean passwordEtIsEmpty;
 
@@ -74,7 +75,7 @@ public class LoginActivity extends Activity {
         protected String doInBackground(String... strings) {
             String email = txt_input_emailLogin.getEditText().getText().toString();
             try{
-                URL url = new URL("http://www.letscleanof.com/api/usuario/" + email);
+                URL url = new URL("http://www.letscleanof.com/api/usuario/email/" + email);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
                 connection.setRequestProperty("Content-Type", "application/json");
@@ -107,16 +108,21 @@ public class LoginActivity extends Activity {
                     //
                     jsonResponse = new JSONObject(s);
                         // Recuperando valor do usuario
-                        String cod = jsonResponse.getString("id");
+                        Long cod = jsonResponse.getLong("id");
                         String nome = jsonResponse.getString("nome");
                         String email = jsonResponse.getString("email");
                         String senha = jsonResponse.getString("senha");
+                        Long admUser = jsonResponse.getLong("admUser");
+                        Long grupoId = jsonResponse.getLong("grupoId");
                         // Instanciando um Grupo e add na lista
                         Usuario us = new Usuario();
                         us.setId(cod);
                         us.setNome(nome);
                         us.setEmail(email);
                         us.setSenha(senha);
+                        us.setAdmUser(admUser);
+                        us.setGrupoId(grupoId);
+
                         validarUser(us);
                     //}
 
@@ -136,7 +142,12 @@ public class LoginActivity extends Activity {
 
             if(txt_input_emailLogin.getEditText().getText().toString().equals(us.getEmail()) && txt_input_senhaLogin.getEditText().getText().toString().equals(us.getSenha())){
                 Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
-                intent.putExtra("idUser", us.getId().toString());
+                intent.putExtra("userId", us.getId().toString());
+                intent.putExtra("userId2", us.getId());
+                if(us.getGrupoId() != null){
+                    intent.putExtra("admUser", us.getAdmUser());
+                    intent.putExtra("grupoId", us.getGrupoId());
+                }
                 startActivity(intent);
 
             } else {

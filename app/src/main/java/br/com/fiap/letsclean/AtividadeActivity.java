@@ -23,37 +23,38 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.fiap.letsclean.adapter.ComodoAdapter;
-import br.com.fiap.letsclean.entity.Comodo;
+import br.com.fiap.letsclean.adapter.AtividadeAdapter;
+import br.com.fiap.letsclean.entity.Atividade;
 
-public class ComodoActivity extends AppCompatActivity {
+public class AtividadeActivity extends AppCompatActivity {
 
     //the recyclerview
-    private Long admUser,grupoId, userId2;
+    String userId;
+    private Long admUser,grupoId;
     private RecyclerView recyclerView;
-    private Button btn_cadastrar_comodo;
+    private Button btn_cadastrar_atividade;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_comodo);
+        setContentView(R.layout.activity_atividade);
 
-        btn_cadastrar_comodo = findViewById(R.id.btn_cadastrar_comodo);
-        formateFont(btn_cadastrar_comodo);
+        btn_cadastrar_atividade = findViewById(R.id.btn_cadastrar_atividade);
+        formateFont(btn_cadastrar_atividade);
 
         //capturar extras de MenuActivity E Criando comodo
         Bundle extras = getIntent().getExtras();
         if(extras!=null){
-            userId2 = extras.getLong("userId2");
+            userId = extras.getString("userId");
             admUser = extras.getLong("admUser");
             grupoId = extras.getLong("grupoId");
         }
 
-        btn_cadastrar_comodo.setOnClickListener(new View.OnClickListener() {
+        btn_cadastrar_atividade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ComodoActivity.this,CadastrarComodoActivity.class);
-                intent.putExtra("userId2", userId2);
+                Intent intent = new Intent(AtividadeActivity.this,CadastrarAtividadeActivity.class);
+                intent.putExtra("userId",userId);
                 intent.putExtra("grupoId", grupoId);
                 startActivity(intent);
             }
@@ -64,21 +65,26 @@ public class ComodoActivity extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        ComodoActivity.ComodoTask task = new ComodoActivity.ComodoTask();
+        AtividadeActivity.AtividadeTask task = new AtividadeActivity.AtividadeTask();
         task.execute();
     }
 
-    private class ComodoTask extends AsyncTask<String,Void,String> {
+    private void formateFont(Button x){
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/robotoRegular.ttf");
+        x.setTypeface(typeface);
+    }
+
+    private class AtividadeTask extends AsyncTask<String,Void,String> {
         ProgressDialog progressDialog;
 
         @Override
         protected void onPreExecute() {
-            progressDialog = ProgressDialog.show(ComodoActivity.this, "Aguarde..", "Carregando Comodos");
+            progressDialog = ProgressDialog.show(AtividadeActivity.this, "Aguarde..", "Carregando Atividades");
         }
         @Override
         protected String doInBackground(String... strings) {
             try {
-                URL url = new URL("http://www.letscleanof.com/api/comodos/grupo/"+grupoId);
+                URL url = new URL("http://www.letscleanof.com/api/atividade/usuario/"+userId);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
                 connection.setRequestProperty("Content-Type", "application/json");
@@ -107,28 +113,31 @@ public class ComodoActivity extends AppCompatActivity {
             progressDialog.dismiss();
             if(s!=null){
                 try {
-                    List<Comodo> comodos = new ArrayList<>();
+                    List<Atividade> atividades = new ArrayList<>();
                     int index=0;
                     JSONArray jsonArray = new JSONArray(s);
                     for ( int i=0; i < jsonArray.length(); i++){
 
-                        JSONObject comodoObjc = (JSONObject) jsonArray.get(i);
-                        // Recuperando valor do Comodo
-                        Long cod = comodoObjc.getLong("id");
-                        String nome = comodoObjc.getString("nome");
-                        Long idUsuario = comodoObjc.getLong("userId");
-                        Long grupoId = comodoObjc.getLong("grupoId");
+                        JSONObject atividObjc = (JSONObject) jsonArray.get(i);
+                        // Recuperando valor da Atividade
+                        Long cod = atividObjc.getLong("id");
+                        String nome = atividObjc.getString("nome");
+                        Long userId = atividObjc.getLong("userId");
+                        Long grupoId = atividObjc.getLong("grupoId");
+                        Long comodoId = atividObjc.getLong("comodoId");
+
                         // Instanciando um Comodo e add na lista
-                        Comodo comodo = new Comodo();
-                        comodo.setId(cod);
-                        comodo.setNome(nome);
-                        comodo.setUserId(idUsuario);
-                        comodo.setGrupoId(grupoId);
-                        comodos.add(comodo);
+                        Atividade atividade =  new Atividade();
+                        atividade.setId(cod);
+                        atividade.setNome(nome);
+                        atividade.setUserId(userId);
+                        atividade.setGrupoId(grupoId);
+                        atividade.setComodoId(comodoId);
+                        atividades.add(atividade);
                     }
 
                     //creating recyclerview adapter
-                    ComodoAdapter adapter = new ComodoAdapter(ComodoActivity.this, (ArrayList<Comodo>) comodos);
+                    AtividadeAdapter adapter = new AtividadeAdapter(AtividadeActivity.this, (ArrayList<Atividade>) atividades);
 
                     //setting adapter to recyclerview
                     recyclerView.setAdapter(adapter);
@@ -137,13 +146,9 @@ public class ComodoActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             } else {
-                Toast.makeText(ComodoActivity.this, "Erro ao carregar comodos", Toast.LENGTH_LONG).show();
+                Toast.makeText(AtividadeActivity.this, "Erro ao carregar Atividades", Toast.LENGTH_LONG).show();
             }
 
         }
-    }
-    private void formateFont(Button x){
-        Typeface typeface = Typeface.createFromAsset(getAssets(), "fonts/robotoRegular.ttf");
-        x.setTypeface(typeface);
     }
 }

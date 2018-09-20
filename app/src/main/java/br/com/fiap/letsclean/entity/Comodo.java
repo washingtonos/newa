@@ -2,28 +2,28 @@ package br.com.fiap.letsclean.entity;
 
 public class Comodo {
 
-	private String id;
+	private Long id;
 	private String nome;
-	private String idGrupo;
-	private String idUsuario;
-	private String idAtividade;
+	private Long grupoId;
+	private Long userId;
+	private Long atividadeId;
 
 	public Comodo() {
 	}
 
-	public Comodo(String id, String nome, String idGrupo, String idUsuario, String idAtividade) {
+	public Comodo(Long id, String nome, Long grupoId, Long userId, Long atividadeId) {
 		this.id = id;
 		this.nome = nome;
-		this.idGrupo = idGrupo;
-		this.idUsuario = idUsuario;
-		this.idAtividade = idAtividade;
+		this.grupoId = grupoId;
+		this.userId = userId;
+		this.atividadeId = atividadeId;
 	}
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -35,27 +35,27 @@ public class Comodo {
 		this.nome = nome;
 	}
 
-	public String getIdGrupo() {
-		return idGrupo;
+	public Long getGrupoId() {
+		return grupoId;
 	}
 
-	public void setIdGrupo(String idGrupo) {
-		this.idGrupo = idGrupo;
+	public void setGrupoId(Long grupoId) {
+		this.grupoId = grupoId;
 	}
 
-	public String getIdUsuario() {
-		return idUsuario;
+	public Long getUserId() {
+		return userId;
 	}
 
-	public void setIdUsuario(String idUsuario) {
-		this.idUsuario = idUsuario;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
-	public String getIdAtividade() {
-		return idAtividade;
+	public Long getAtividadeId() {
+		return atividadeId;
 	}
 
-	public void setIdAtividade(String idAtividade) {
-		this.idAtividade = idAtividade;
+	public void setAtividadeId(Long atividadeId) {
+		this.atividadeId = atividadeId;
 	}
 }

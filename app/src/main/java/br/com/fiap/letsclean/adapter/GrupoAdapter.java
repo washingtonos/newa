@@ -69,8 +69,9 @@ public class GrupoAdapter extends RecyclerView.Adapter<GrupoAdapter.GrupoViewHol
             int position  = getAdapterPosition();
             Grupo grupo = this.grupos.get(position);
             Intent intent = new Intent(this.mContext , Grupo_Detalhe.class);
-            intent.putExtra("id_grupo", grupo.getId());
-            intent.putExtra("id_user", grupo.getIdUser());
+            intent.putExtra("nome", grupo.getNome());
+            intent.putExtra("grupoId", grupo.getId());
+            intent.putExtra("userId", grupo.getUserId());
             this.mContext.startActivity(intent);
         }
     }

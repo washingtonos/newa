@@ -4,34 +4,34 @@ import java.util.List;
 
 public class Usuario {
 
-	private String id;
+	private Long id;
 	private String nome;
 	private String email;
 	private String senha;
-	private Boolean adm;
-	private Grupo grupo;
-	private List<Comodo> listComodo;
-	private List<Atividade> listAtividade;
+	private Long admUser;
+	private Long atividadeId;
+	private Long grupoId;
+	private Long comodoId;
 
 	public Usuario() {
 	}
 
-	public Usuario(String id, String nome, String email, String senha, Boolean adm, Grupo grupo, List<Comodo> listComodo, List<Atividade> listAtividade) {
+	public Usuario(Long id, String nome, String email, String senha, Long admUser, Long atividadeId, Long grupoId, Long comodoId) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
-		this.adm = adm;
-		this.grupo = grupo;
-		this.listComodo = listComodo;
-		this.listAtividade = listAtividade;
+		this.admUser = admUser;
+		this.atividadeId = atividadeId;
+		this.grupoId = grupoId;
+		this.comodoId = comodoId;
 	}
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -59,36 +59,35 @@ public class Usuario {
 		this.senha = senha;
 	}
 
-	public Boolean getAdm() {
-		return adm;
+	public Long getAdmUser() {
+		return admUser;
 	}
 
-	public void setAdm(Boolean adm) {
-		this.adm = adm;
+	public void setAdmUser(Long admUser) {
+		this.admUser = admUser;
 	}
 
-	public Grupo getGrupo() {
-		return grupo;
+	public Long getAtividadeId() {
+		return atividadeId;
 	}
 
-	public void setGrupo(Grupo grupo) {
-		this.grupo = grupo;
+	public void setAtividadeId(Long atividadeId) {
+		this.atividadeId = atividadeId;
 	}
 
-	public List<Comodo> getListComodo() {
-		return listComodo;
+	public Long getGrupoId() {
+		return grupoId;
 	}
 
-	public void setListComodo(List<Comodo> listComodo) {
-		this.listComodo = listComodo;
+	public void setGrupoId(Long grupoId) {
+		this.grupoId = grupoId;
 	}
 
-	public List<Atividade> getListAtividade() {
-		return listAtividade;
+	public Long getComodoId() {
+		return comodoId;
 	}
 
-	public void setListAtividade(List<Atividade> listAtividade) {
-		this.listAtividade = listAtividade;
+	public void setComodoId(Long comodoId) {
+		this.comodoId = comodoId;
 	}
-
 }

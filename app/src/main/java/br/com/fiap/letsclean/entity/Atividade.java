@@ -5,20 +5,20 @@ public class Atividade {
 	private Long id;
 	private String nome;
 	private String desc;
-	private Grupo grupo;
-	private Usuario usuario;
-	private Comodo comodo;
+	private Long grupoId;
+	private Long comodoId;
+	private Long userId;
 
 	public Atividade() {
 	}
 
-	public Atividade(Long id, String nome, String desc, Grupo grupo, Usuario usuario, Comodo comodo) {
+	public Atividade(Long id, String nome, String desc, Long grupoId, Long comodoId, Long userId) {
 		this.id = id;
 		this.nome = nome;
 		this.desc = desc;
-		this.grupo = grupo;
-		this.usuario = usuario;
-		this.comodo = comodo;
+		this.grupoId = grupoId;
+		this.comodoId = comodoId;
+		this.userId = userId;
 	}
 
 	public Long getId() {
@@ -45,28 +45,27 @@ public class Atividade {
 		this.desc = desc;
 	}
 
-	public Grupo getGrupo() {
-		return grupo;
+	public Long getGrupoId() {
+		return grupoId;
 	}
 
-	public void setGrupo(Grupo grupo) {
-		this.grupo = grupo;
+	public void setGrupoId(Long grupoId) {
+		this.grupoId = grupoId;
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public Long getComodoId() {
+		return comodoId;
 	}
 
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setComodoId(Long comodoId) {
+		this.comodoId = comodoId;
 	}
 
-	public Comodo getComodo() {
-		return comodo;
+	public Long getUserId() {
+		return userId;
 	}
 
-	public void setComodo(Comodo comodo) {
-		this.comodo = comodo;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
-
 }

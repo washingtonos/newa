@@ -39,7 +39,10 @@
         <activity android:name=".Grupo_Detalhe" />
         <activity android:name=".ComodoActivity" />
         <activity android:name=".CadastrarComodoActivity" />
-        <activity android:name=".ComodoDetalheActivity"></activity>
+        <activity android:name=".ComodoDetalheActivity" />
+        <activity android:name=".CadastrarAtividadeActivity" />
+        <activity android:name=".AtividadeActivity" />
+        <activity android:name=".AddIntegranteActivity"></activity>
     </application>
 
 </manifest>

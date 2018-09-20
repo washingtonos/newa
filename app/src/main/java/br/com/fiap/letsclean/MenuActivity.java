@@ -7,7 +7,8 @@ import android.view.View;
 
 public class MenuActivity extends AppCompatActivity {
 
-    private String idUsuario;
+    private String userId;
+    private Long admUser,grupoId, userId2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,19 +18,38 @@ public class MenuActivity extends AppCompatActivity {
         //Capturar id de Usuario  de activity anterior
         Bundle extras = getIntent().getExtras();
         if(extras!=null){
-            idUsuario = extras.getString("idUser");
+            userId = extras.getString("userId");
+            userId2 = extras.getLong("userId2");
+            admUser = extras.getLong("admUser");
+            grupoId = extras.getLong("grupoId");
         }
     }
 
     public void group(View view) {
         Intent intent = new Intent(this, GrupoActivity.class);
-        intent.putExtra("idUser", idUsuario);
+        intent.putExtra("userId", userId);
+        intent.putExtra("grupoId", grupoId);
         startActivity(intent);
     }
 
     public void comodo(View view) {
         Intent intent = new Intent(this, ComodoActivity.class);
-        intent.putExtra("idUser", idUsuario);
+        intent.putExtra("userId", userId);
+        intent.putExtra("userId2", userId2);
+        if(grupoId != null){
+            intent.putExtra("admUser", admUser);
+            intent.putExtra("grupoId", grupoId);
+        }
+        startActivity(intent);
+    }
+
+    public void atividade(View view) {
+        Intent intent = new Intent(this, AtividadeActivity.class);
+        intent.putExtra("userId", userId);
+        if(grupoId != null){
+            intent.putExtra("admUser", admUser);
+            intent.putExtra("grupoId", grupoId);
+        }
         startActivity(intent);
     }
 }

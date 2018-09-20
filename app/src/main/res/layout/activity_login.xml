@@ -91,6 +91,7 @@
             android:layout_marginRight="20dp"
             android:background="@drawable/login_entrar_btn"
             android:onClick="doLogin"/>
+
         <Button
             android:id="@+id/btn_registrar"
             android:layout_width="match_parent"

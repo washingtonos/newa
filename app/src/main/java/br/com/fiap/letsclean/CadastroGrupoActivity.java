@@ -25,7 +25,8 @@ import br.com.fiap.letsclean.entity.Grupo;
 
 public class CadastroGrupoActivity extends AppCompatActivity {
 
-    String idUsuario;
+    Long userIdL, grupoId;
+    String userId;
     TextInputLayout txt_input_nome, txt_input_desc;
 
     @Override
@@ -39,7 +40,8 @@ public class CadastroGrupoActivity extends AppCompatActivity {
 
         Bundle extras = getIntent().getExtras();
         if(extras!=null){
-            idUsuario = extras.getString("idUser");
+            userId = extras.getString("userId");
+            userIdL = userIdL.valueOf(userId);
         }
     }
 
@@ -72,7 +74,7 @@ public class CadastroGrupoActivity extends AppCompatActivity {
             Grupo grupo = new Grupo();
             grupo.setNome(txt_input_nome.getEditText().getText().toString());
             grupo.setDescricao(txt_input_desc.getEditText().getText().toString());
-            grupo.setIdUser(idUsuario);
+            grupo.setUserId(userIdL);
 
             // Recuperar informações de outra activity (Senha)
             CadastraGrupoTask task = new CadastraGrupoTask();
@@ -114,8 +116,8 @@ public class CadastroGrupoActivity extends AppCompatActivity {
                 JSONObject jsonParamsGrupo = new JSONObject();
                 jsonParamsGrupo.put("nome",grupos[0].getNome());
                 jsonParamsGrupo.put("descricao",grupos[0].getDescricao());
-                jsonParamsGrupo.put("id_user", grupos[0].getIdUser());
-                jsonParamsGrupo.put("id_adm", '1');
+                jsonParamsGrupo.put("userId", grupos[0].getUserId());
+                jsonParamsGrupo.put("admUser", '1');
 
                 OutputStreamWriter osw = new OutputStreamWriter(connection.getOutputStream());
                 osw.write(jsonParamsGrupo.toString());
@@ -147,6 +149,7 @@ public class CadastroGrupoActivity extends AppCompatActivity {
     private void openGrupo(DialogInterface dialog) {
         dialog.dismiss();
         Intent intent = new Intent(CadastroGrupoActivity.this, GrupoActivity.class);
+        intent.putExtra("grupoId", grupoId);
         startActivity(intent);
     }
 

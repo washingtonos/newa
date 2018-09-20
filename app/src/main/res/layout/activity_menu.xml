@@ -86,6 +86,7 @@
                 app:cardMaxElevation="6dp"
                 app:cardCornerRadius="12dp"
                 android:layout_margin="12dp"
+                android:onClick="atividade"
                 >
 
                 <LinearLayout

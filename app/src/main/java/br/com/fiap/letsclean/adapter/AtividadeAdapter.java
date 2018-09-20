@@ -12,50 +12,50 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.com.fiap.letsclean.R;
-import br.com.fiap.letsclean.entity.Comodo;
 import br.com.fiap.letsclean.ComodoDetalheActivity;
+import br.com.fiap.letsclean.R;
+import br.com.fiap.letsclean.entity.Atividade;
 
-public class ComodoAdapter extends RecyclerView.Adapter<ComodoAdapter.ComodoViewHolder>{
+public class AtividadeAdapter extends RecyclerView.Adapter<AtividadeAdapter.AtividadeViewHolder>{
 
     private Context mContext;
-    private List<Comodo> comodos = new ArrayList<>();
+    private List<Atividade> atividades = new ArrayList<>();
 
-    public ComodoAdapter(Context mContext, ArrayList<Comodo> comodos) {
+    public AtividadeAdapter(Context mContext, ArrayList<Atividade> atividades) {
         this.mContext = mContext;
-        this.comodos = comodos;
+        this.atividades = atividades;
     }
 
     @NonNull
     @Override
-    public ComodoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AtividadeAdapter.AtividadeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //inflating and returning our view holder
         LayoutInflater inflater = LayoutInflater.from(mContext);
         View view = inflater.inflate(R.layout.list_comodo_layout, parent,false);
-        return new ComodoViewHolder(view ,mContext, (ArrayList<Comodo>) comodos);
+        return new AtividadeAdapter.AtividadeViewHolder(view ,mContext, (ArrayList<Atividade>) atividades);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ComodoViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull AtividadeAdapter.AtividadeViewHolder holder, int position) {
         //getting the group of the specified position
-        Comodo  comodo = comodos.get(position);
+        Atividade  atividade = atividades.get(position);
 
         //binding the data with the viewholder views
-        holder.textViewTitle.setText(comodo.getNome());
+        holder.textViewTitle.setText(atividade.getNome());
     }
 
     @Override
     public int getItemCount() {
-        return comodos.size();
+        return atividades.size();
     }
 
-    class  ComodoViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        ArrayList<Comodo> comodos = new ArrayList<>();
+    class  AtividadeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+        ArrayList<Atividade> atividades = new ArrayList<>();
         TextView textViewTitle;
         Context  mContext;
-        public ComodoViewHolder(@NonNull View itemView, Context mContext, ArrayList<Comodo> comodos) {
+        public AtividadeViewHolder(@NonNull View itemView, Context mContext, ArrayList<Atividade> atividades) {
             super(itemView);
-            this.comodos = comodos;
+            this.atividades = atividades;
             this.mContext  = mContext;
             itemView.setOnClickListener(this);
             textViewTitle = itemView.findViewById(R.id.textViewTitle);
@@ -64,11 +64,11 @@ public class ComodoAdapter extends RecyclerView.Adapter<ComodoAdapter.ComodoView
         @Override
         public void onClick(View v) {
             int position  = getAdapterPosition();
-            Comodo comodo = this.comodos.get(position);
+            Atividade atividade = this.atividades.get(position);
             Intent intent = new Intent(this.mContext , ComodoDetalheActivity.class);
-            intent.putExtra("comodoId", comodo.getId());
-            intent.putExtra("userId", comodo.getUserId());
-            intent.putExtra("grupoId", comodo.getGrupoId());
+            intent.putExtra("comodoId", atividade.getId());
+            intent.putExtra("userId", atividade.getUserId());
+            intent.putExtra("grupoId", atividade.getGrupoId());
             this.mContext.startActivity(intent);
         }
     }

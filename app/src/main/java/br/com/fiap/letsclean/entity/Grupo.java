@@ -2,31 +2,32 @@ package br.com.fiap.letsclean.entity;
 
 public class Grupo{
 
-	private String id;
+	private Long id;
 	private String nome;
 	private String descricao;
-	private String idUser;
-	private String id_comodo;
-	private String id_atividade;
-
+	private Long admUser;
+	private Long userId;
+	private Long comodoId;
+	private Long atividadeId;
 
 	public Grupo() {
 	}
 
-	public Grupo(String id, String nome, String descricao, String idUser, String id_comodo, String id_atividade) {
+	public Grupo(Long id, String nome, String descricao, Long admUser, Long userId, Long comodoId, Long atividadeId) {
 		this.id = id;
 		this.nome = nome;
 		this.descricao = descricao;
-		this.idUser = idUser;
-		this.id_comodo = id_comodo;
-		this.id_atividade = id_atividade;
+		this.admUser = admUser;
+		this.userId = userId;
+		this.comodoId = comodoId;
+		this.atividadeId = atividadeId;
 	}
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -46,27 +47,35 @@ public class Grupo{
 		this.descricao = descricao;
 	}
 
-	public String getIdUser() {
-		return idUser;
+	public Long getAdmUser() {
+		return admUser;
 	}
 
-	public void setIdUser(String idUser) {
-		this.idUser = idUser;
+	public void setAdmUser(Long admUser) {
+		this.admUser = admUser;
 	}
 
-	public String getId_comodo() {
-		return id_comodo;
+	public Long getUserId() {
+		return userId;
 	}
 
-	public void setId_comodo(String id_comodo) {
-		this.id_comodo = id_comodo;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
 
-	public String getId_atividade() {
-		return id_atividade;
+	public Long getComodoId() {
+		return comodoId;
 	}
 
-	public void setId_atividade(String id_atividade) {
-		this.id_atividade = id_atividade;
+	public void setComodoId(Long comodoId) {
+		this.comodoId = comodoId;
+	}
+
+	public Long getAtividadeId() {
+		return atividadeId;
+	}
+
+	public void setAtividadeId(Long atividadeId) {
+		this.atividadeId = atividadeId;
 	}
 }

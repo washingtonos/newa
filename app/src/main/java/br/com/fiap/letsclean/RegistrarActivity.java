@@ -21,7 +21,7 @@ import br.com.fiap.letsclean.entity.Usuario;
 
 public class RegistrarActivity extends AppCompatActivity {
 
-    TextInputLayout txt_input_nomeUsuario, txt_input_email, txt_input_senha ;
+    private TextInputLayout txt_input_nomeUsuario, txt_input_email, txt_input_senha ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +65,7 @@ public class RegistrarActivity extends AppCompatActivity {
             usuario.setNome(txt_input_nomeUsuario.getEditText().getText().toString());
             usuario.setEmail(txt_input_email.getEditText().getText().toString());
             usuario.setSenha(txt_input_senha.getEditText().getText().toString());
+            usuario.setAdmUser(Long.valueOf(0));
             CadastrarUsuarioTask task = new CadastrarUsuarioTask();
             task.execute(usuario);
         }
@@ -90,6 +91,8 @@ public class RegistrarActivity extends AppCompatActivity {
                 jsonParamsGrupo.put("nome",usuarios[0].getNome());
                 jsonParamsGrupo.put("email",usuarios[0].getEmail());
                 jsonParamsGrupo.put("senha",usuarios[0].getSenha());
+                jsonParamsGrupo.put("admUser",usuarios[0].getAdmUser().toString());
+                jsonParamsGrupo.put("grupoId",usuarios[0].getAdmUser().toString());
 
 
                 OutputStreamWriter osw = new OutputStreamWriter(connection.getOutputStream());
@@ -127,6 +130,7 @@ public class RegistrarActivity extends AppCompatActivity {
                     public void onClick(DialogInterface dialog, int which) {
                       dialog.dismiss();
                       limparActivity();
+
                     }
                 });
         builder.show();

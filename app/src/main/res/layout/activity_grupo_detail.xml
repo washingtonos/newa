@@ -1,8 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".Grupo_Detalhe">
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:id="@+id/txt_nomeGrupo"
+        android:layout_marginBottom="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="nome grupo"/>
+
+    <Button
+        android:id="@+id/btn_add_integrante"
+        android:text="Adicionar Integrante"
+        android:textAllCaps="false"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
+        android:layout_below="@+id/txt_nomeGrupo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/buttonshape"
+        android:onClick="openDialogCadastrar"
+        />
+
+</RelativeLayout>

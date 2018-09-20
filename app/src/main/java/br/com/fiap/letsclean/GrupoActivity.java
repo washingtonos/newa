@@ -29,7 +29,8 @@ import br.com.fiap.letsclean.entity.Grupo;
 public class GrupoActivity extends AppCompatActivity {
 
     //the recyclerview
-    String idUsuario;
+    String userId;
+    Long admUser,grupoId;
     RecyclerView recyclerView;
     Button btn_cadastrar_grupo;
 
@@ -44,13 +45,16 @@ public class GrupoActivity extends AppCompatActivity {
         //capturar extras de MenuActivity E Criando grupo
         Bundle extras = getIntent().getExtras();
         if(extras!=null){
-            idUsuario = extras.getString("idUser");
+            userId = extras.getString("userId");
+            admUser = extras.getLong("admUser");
+            grupoId = extras.getLong("grupoId");
         }
+
         btn_cadastrar_grupo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(GrupoActivity.this,CadastroGrupoActivity.class);
-                intent.putExtra("idUser",idUsuario);
+                intent.putExtra("userId",userId);
                 startActivity(intent);
             }
         });
@@ -79,7 +83,7 @@ public class GrupoActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
             try {
-                URL url = new URL("http://www.letscleanof.com/api/grupos");
+                URL url = new URL("http://www.letscleanof.com/api/grupos/"+grupoId);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
                 connection.setRequestProperty("Content-Type", "application/json");
@@ -115,14 +119,16 @@ public class GrupoActivity extends AppCompatActivity {
 
                         JSONObject grupo = (JSONObject) jsonArray.get(i);
                         // Recuperando valor do grupo
-                        String cod = grupo.getString("id");
+                        Long cod = grupo.getLong("id");
                         String nome = grupo.getString("nome");
                         String desc = grupo.getString("descricao");
+                        Long idUsuario = grupo.getLong("userId");
                         // Instanciando um Grupo e add na lista
                         Grupo grup = new Grupo();
                         grup.setId(cod);
                         grup.setNome(nome);
                         grup.setDescricao(desc);
+                        grup.setUserId(idUsuario);
                         grupos.add(grup);
                     }
 
