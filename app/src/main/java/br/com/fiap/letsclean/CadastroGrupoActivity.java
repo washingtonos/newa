@@ -15,19 +15,24 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
 import br.com.fiap.letsclean.entity.Grupo;
+import br.com.fiap.letsclean.entity.Usuario;
 
 public class CadastroGrupoActivity extends AppCompatActivity {
 
     Long userIdL, grupoId;
     String userId;
     TextInputLayout txt_input_nome, txt_input_desc;
+    private Usuario us = new Usuario();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,7 +154,8 @@ public class CadastroGrupoActivity extends AppCompatActivity {
     private void openGrupo(DialogInterface dialog) {
         dialog.dismiss();
         Intent intent = new Intent(CadastroGrupoActivity.this, GrupoActivity.class);
-        intent.putExtra("grupoId", grupoId);
+        recuperarIdGrupo();
+        intent.putExtra("grupoId", us.getGrupoId());
         startActivity(intent);
     }
 
@@ -164,5 +170,56 @@ public class CadastroGrupoActivity extends AppCompatActivity {
                     }
                 });
         builder.show();
+    }
+
+    private void recuperarIdGrupo(){
+        BuscarGrupo task = new BuscarGrupo();
+        task.execute();
+    }
+
+    private class BuscarGrupo extends AsyncTask<String,Void,String>{
+        @Override
+        protected String doInBackground(String... strings) {
+            try{
+                URL url = new URL("http://www.letscleanof.com/api/usuario/"+ userId);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+                connection.setRequestProperty("Content-Type", "application/json");
+
+                if(connection.getResponseCode()==200){
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                    StringBuilder resposta = new StringBuilder();
+                    String linha = "";
+
+                    while((linha=reader.readLine())!=null){
+                        resposta.append(linha);
+                    }
+
+                    connection.disconnect();
+                    return resposta.toString();
+                }
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            JSONObject jsonResponse = null;
+            if(s != null && !s.equals("")){
+                try {
+                    //
+                    jsonResponse = new JSONObject(s);
+                    // Recuperando valor do usuario
+                    Long grupoId = jsonResponse.getLong("grupoId");
+                    us.setGrupoId(grupoId);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 }
