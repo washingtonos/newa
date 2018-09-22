@@ -1,6 +1,8 @@
 package br.com.fiap.letsclean;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
@@ -52,10 +54,27 @@ public class ComodoActivity extends AppCompatActivity {
         btn_cadastrar_comodo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ComodoActivity.this,CadastrarComodoActivity.class);
-                intent.putExtra("userId2", userId2);
-                intent.putExtra("grupoId", grupoId);
-                startActivity(intent);
+                if(grupoId != null){
+                    if(grupoId != Long.valueOf(0)){
+                        Intent intent = new Intent(ComodoActivity.this,CadastrarComodoActivity.class);
+                        intent.putExtra("userId2", userId2);
+                        intent.putExtra("grupoId", grupoId);
+                        startActivity(intent);
+                    }
+                    else{
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(ComodoActivity.this);
+                        builder.setTitle("Comodo")
+                                .setMessage("Para cadastrar um Comodo, você precisa criar um grupo")
+                                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                        builder.show();
+                    }
+                }
+
             }
         });
 

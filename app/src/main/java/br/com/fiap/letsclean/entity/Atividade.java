@@ -8,17 +8,19 @@ public class Atividade {
 	private Long grupoId;
 	private Long comodoId;
 	private Long userId;
+	private Long status;
 
 	public Atividade() {
 	}
 
-	public Atividade(Long id, String nome, String desc, Long grupoId, Long comodoId, Long userId) {
+	public Atividade(Long id, String nome, String desc, Long grupoId, Long comodoId, Long userId, Long status) {
 		this.id = id;
 		this.nome = nome;
 		this.desc = desc;
 		this.grupoId = grupoId;
 		this.comodoId = comodoId;
 		this.userId = userId;
+		this.status = status;
 	}
 
 	public Long getId() {
@@ -67,5 +69,13 @@ public class Atividade {
 
 	public void setUserId(Long userId) {
 		this.userId = userId;
+	}
+
+	public Long getStatus() {
+		return status;
+	}
+
+	public void setStatus(Long status) {
+		this.status = status;
 	}
 }

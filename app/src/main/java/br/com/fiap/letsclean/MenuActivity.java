@@ -49,6 +49,7 @@ public class MenuActivity extends AppCompatActivity {
         if(grupoId != null){
             intent.putExtra("admUser", admUser);
             intent.putExtra("grupoId", grupoId);
+            intent.putExtra("userId2", userId2);
         }
         startActivity(intent);
     }

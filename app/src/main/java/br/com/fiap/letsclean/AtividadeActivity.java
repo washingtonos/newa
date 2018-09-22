@@ -1,6 +1,8 @@
 package br.com.fiap.letsclean;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
@@ -29,10 +31,11 @@ import br.com.fiap.letsclean.entity.Atividade;
 public class AtividadeActivity extends AppCompatActivity {
 
     //the recyclerview
-    String userId;
-    private Long admUser,grupoId;
+    private Long admUser,grupoId,userId2,param;
     private RecyclerView recyclerView;
     private Button btn_cadastrar_atividade;
+    String urlS;
+    private List<Atividade> atividades;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +45,10 @@ public class AtividadeActivity extends AppCompatActivity {
         btn_cadastrar_atividade = findViewById(R.id.btn_cadastrar_atividade);
         formateFont(btn_cadastrar_atividade);
 
-        //capturar extras de MenuActivity E Criando comodo
+        //capturar extras de MenuActivity
         Bundle extras = getIntent().getExtras();
         if(extras!=null){
-            userId = extras.getString("userId");
+            userId2 = extras.getLong("userId2");
             admUser = extras.getLong("admUser");
             grupoId = extras.getLong("grupoId");
         }
@@ -53,10 +56,42 @@ public class AtividadeActivity extends AppCompatActivity {
         btn_cadastrar_atividade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(AtividadeActivity.this,CadastrarAtividadeActivity.class);
-                intent.putExtra("userId",userId);
-                intent.putExtra("grupoId", grupoId);
-                startActivity(intent);
+                if(grupoId != null){
+                    if(grupoId != Long.valueOf(0)){
+                        if(admUser != Long.valueOf(0)){
+                            Intent intent = new Intent(AtividadeActivity.this,CadastrarAtividadeActivity.class);
+                            intent.putExtra("userId2",userId2);
+                            intent.putExtra("grupoId", grupoId);
+                            startActivity(intent);
+                        }
+                        else{
+                            final AlertDialog.Builder builder = new AlertDialog.Builder(AtividadeActivity.this);
+                            builder.setTitle("Atividade")
+                                    .setMessage("Apenas o administrador do grupo pode criar atividades")
+                                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+                            builder.show();
+                        }
+
+                    }
+                    else{
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(AtividadeActivity.this);
+                        builder.setTitle("Atividade")
+                                .setMessage("Para cadastrar uma Atividade, você precisa criar um grupo")
+                                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                });
+                        builder.show();
+                    }
+                }
+
             }
         });
 
@@ -84,7 +119,7 @@ public class AtividadeActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
             try {
-                URL url = new URL("http://www.letscleanof.com/api/atividade/usuario/"+userId);
+                URL url = new URL("http://www.letscleanof.com/api/atividade/usuario/"+userId2);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
                 connection.setRequestProperty("Content-Type", "application/json");
@@ -113,7 +148,7 @@ public class AtividadeActivity extends AppCompatActivity {
             progressDialog.dismiss();
             if(s!=null){
                 try {
-                    List<Atividade> atividades = new ArrayList<>();
+                    atividades = new ArrayList<>();
                     int index=0;
                     JSONArray jsonArray = new JSONArray(s);
                     for ( int i=0; i < jsonArray.length(); i++){
@@ -122,25 +157,34 @@ public class AtividadeActivity extends AppCompatActivity {
                         // Recuperando valor da Atividade
                         Long cod = atividObjc.getLong("id");
                         String nome = atividObjc.getString("nome");
+                        String desc = atividObjc.getString("descricao");
                         Long userId = atividObjc.getLong("userId");
                         Long grupoId = atividObjc.getLong("grupoId");
                         Long comodoId = atividObjc.getLong("comodoId");
+                        Long status  = atividObjc.getLong("status");
 
                         // Instanciando um Comodo e add na lista
                         Atividade atividade =  new Atividade();
                         atividade.setId(cod);
                         atividade.setNome(nome);
+                        atividade.setDesc(desc);
                         atividade.setUserId(userId);
                         atividade.setGrupoId(grupoId);
                         atividade.setComodoId(comodoId);
+                        atividade.setStatus(status);
                         atividades.add(atividade);
                     }
 
-                    //creating recyclerview adapter
-                    AtividadeAdapter adapter = new AtividadeAdapter(AtividadeActivity.this, (ArrayList<Atividade>) atividades);
-
-                    //setting adapter to recyclerview
-                    recyclerView.setAdapter(adapter);
+                    if(!atividades.isEmpty()){
+                        for ( int i=0; i < atividades.size(); i++){
+                            if(atividades.get(i).getStatus() == Long.valueOf(0)){
+                                //creating recyclerview adapter
+                                AtividadeAdapter adapter = new AtividadeAdapter(AtividadeActivity.this, (ArrayList<Atividade>) atividades);
+                                //setting adapter to recyclerview
+                                recyclerView.setAdapter(adapter);
+                            }
+                        }
+                    }
 
                 }catch (JSONException e){
                     e.printStackTrace();

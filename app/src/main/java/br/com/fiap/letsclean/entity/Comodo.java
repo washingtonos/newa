@@ -58,4 +58,9 @@ public class Comodo {
 	public void setAtividadeId(Long atividadeId) {
 		this.atividadeId = atividadeId;
 	}
+
+	@Override
+	public String toString() {
+		return nome;
+	}
 }

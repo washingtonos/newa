@@ -25,14 +25,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import br.com.fiap.letsclean.entity.Grupo;
-import br.com.fiap.letsclean.entity.Usuario;
 
 public class CadastroGrupoActivity extends AppCompatActivity {
 
     Long userIdL, grupoId;
     String userId;
     TextInputLayout txt_input_nome, txt_input_desc;
-    private Usuario us = new Usuario();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,6 +138,7 @@ public class CadastroGrupoActivity extends AppCompatActivity {
             progressDialog.dismiss();
 
             if(integer == 201){
+                recuperarIdGrupo();
                 openDialog();
             } if (integer == 404){
                 Toast.makeText(CadastroGrupoActivity.this, "Tente Novamente mais tarde", Toast.LENGTH_LONG).show();
@@ -148,15 +147,6 @@ public class CadastroGrupoActivity extends AppCompatActivity {
                 Toast.makeText(CadastroGrupoActivity.this, "Internal Server Error", Toast.LENGTH_LONG).show();
             }
         }
-    }
-
-    // Abir grupo
-    private void openGrupo(DialogInterface dialog) {
-        dialog.dismiss();
-        Intent intent = new Intent(CadastroGrupoActivity.this, GrupoActivity.class);
-        recuperarIdGrupo();
-        intent.putExtra("grupoId", us.getGrupoId());
-        startActivity(intent);
     }
 
     private void openDialog() {
@@ -175,6 +165,14 @@ public class CadastroGrupoActivity extends AppCompatActivity {
     private void recuperarIdGrupo(){
         BuscarGrupo task = new BuscarGrupo();
         task.execute();
+    }
+
+    // Abir grupo
+    private void openGrupo(DialogInterface dialog) {
+        dialog.dismiss();
+        Intent intent = new Intent(CadastroGrupoActivity.this, GrupoActivity.class);
+        intent.putExtra("grupoId", grupoId);
+        startActivity(intent);
     }
 
     private class BuscarGrupo extends AsyncTask<String,Void,String>{
@@ -213,8 +211,7 @@ public class CadastroGrupoActivity extends AppCompatActivity {
                     //
                     jsonResponse = new JSONObject(s);
                     // Recuperando valor do usuario
-                    Long grupoId = jsonResponse.getLong("grupoId");
-                    us.setGrupoId(grupoId);
+                    grupoId = jsonResponse.getLong("grupoId");
 
                 } catch (JSONException e) {
                     e.printStackTrace();

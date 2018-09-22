@@ -1,6 +1,8 @@
 package br.com.fiap.letsclean;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
@@ -53,9 +55,25 @@ public class GrupoActivity extends AppCompatActivity {
         btn_cadastrar_grupo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(GrupoActivity.this,CadastroGrupoActivity.class);
-                intent.putExtra("userId",userId);
-                startActivity(intent);
+                if(grupoId != null){
+                    if(grupoId == Long.valueOf(0)){
+                        Intent intent = new Intent(GrupoActivity.this,CadastroGrupoActivity.class);
+                        intent.putExtra("userId",userId);
+                        startActivity(intent);
+                    }
+                    else{
+                        final AlertDialog.Builder builder = new AlertDialog.Builder(GrupoActivity.this);
+                        builder.setTitle("Grupo")
+                                .setMessage("Grupo já cadastrado")
+                                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                       dialog.dismiss();
+                                    }
+                                });
+                        builder.show();
+                    }
+                }
             }
         });
 

@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -15,7 +17,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!-- Apenas para testar aplicacao -->
+        <!--
+        Apenas para testar aplicacao
+        <activity android:name=".CadastrarAtividadeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        -->
+        <!-- OFICIAL -->
         <activity android:name=".GettingstartedActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,7 +44,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".GettingstartedActivity" />
         </activity>
-        <activity android:name=".GrupoActivity" />
+        <activity android:name=".GrupoActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MenuActivity" />
+        </activity>
         <activity android:name=".MenuActivity" />
         <activity android:name=".SobreActivity" />
         <activity android:name=".RegistrarActivity" />
@@ -40,9 +56,13 @@
         <activity android:name=".ComodoActivity" />
         <activity android:name=".CadastrarComodoActivity" />
         <activity android:name=".ComodoDetalheActivity" />
-        <activity android:name=".CadastrarAtividadeActivity" />
+        <activity
+            android:name=".CadastrarAtividadeActivity"
+            android:label="Cadastrar Atividade"
+            android:theme="@style/AppTheme1" />
         <activity android:name=".AtividadeActivity" />
-        <activity android:name=".AddIntegranteActivity"></activity>
+        <activity android:name=".AddIntegranteActivity" />
+        <activity android:name=".AtividadeDetalheActivity"></activity>
     </application>
 
 </manifest>

@@ -1,7 +1,5 @@
 package br.com.fiap.letsclean.entity;
 
-import java.util.List;
-
 public class Usuario {
 
 	private Long id;
@@ -89,5 +87,10 @@ public class Usuario {
 
 	public void setComodoId(Long comodoId) {
 		this.comodoId = comodoId;
+	}
+
+	@Override
+	public String toString() {
+		return nome;
 	}
 }

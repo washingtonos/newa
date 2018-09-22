@@ -25,7 +25,7 @@ import br.com.fiap.letsclean.entity.Usuario;
 
 public class LoginActivity extends Activity {
 
-    private Long admUserL,grupoIdL;
+
     private TextInputLayout txt_input_emailLogin, txt_input_senhaLogin;
     private boolean userEtIsEmpty;
     private boolean passwordEtIsEmpty;
@@ -105,7 +105,7 @@ public class LoginActivity extends Activity {
             JSONObject jsonResponse = null;
             if(s != null && !s.equals("")){
                 try {
-                    //
+
                     jsonResponse = new JSONObject(s);
                         // Recuperando valor do usuario
                         Long cod = jsonResponse.getLong("id");
@@ -124,7 +124,6 @@ public class LoginActivity extends Activity {
                         us.setGrupoId(grupoId);
 
                         validarUser(us);
-                    //}
 
                 }catch (JSONException e){
                     e.printStackTrace();
