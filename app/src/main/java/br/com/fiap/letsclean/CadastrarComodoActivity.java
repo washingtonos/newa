@@ -138,5 +138,6 @@ public class CadastrarComodoActivity extends AppCompatActivity {
         intent.putExtra("userId",userId);
         intent.putExtra("grupoId", grupoId);
         startActivity(intent);
+        finish();
     }
 }

@@ -5,25 +5,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".Grupo_Detalhe">
 
-    <TextView
-        android:id="@+id/txt_nomeGrupo"
-        android:layout_marginBottom="2dp"
+    <RelativeLayout
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:text="nome grupo"/>
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/btn_add_integrante"
-        android:text="Adicionar Integrante"
-        android:textAllCaps="false"
-        android:layout_width="250dp"
-        android:layout_height="45dp"
-        android:layout_below="@+id/txt_nomeGrupo"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:background="@drawable/buttonshape"
-        android:onClick="openDialogCadastrar"
-        />
+        <TextView
+            android:textSize="20dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Title"
+            android:id="@+id/txt_nomeGrupo"
+            android:layout_marginBottom="2dp"
+            android:layout_width="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:text="nome grupo"/>
+
+        <Button
+            android:id="@+id/btn_add_integrante"
+            android:text="Adicionar Integrante"
+            android:textAllCaps="false"
+            android:layout_width="250dp"
+            android:layout_height="45dp"
+            android:layout_below="@+id/txt_nomeGrupo"
+            android:layout_centerHorizontal="true"
+            android:textColor="#FFFF"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/buttonshape"
+            android:onClick="openDialogCadastrar"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="110dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+    >
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+        </RelativeLayout>
 
 </RelativeLayout>

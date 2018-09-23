@@ -8,7 +8,7 @@
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingTop="16dp"
-    android:background="@drawable/bg_login"
+    android:background="#1c8adb"
     tools:context=".RegistrarActivity">
 
     <ImageView
@@ -22,16 +22,18 @@
         android:contentDescription="@string/logo_img_st" />
 
     <RelativeLayout
+        android:background="#FFFF"
+        android:layout_marginTop="300dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-       >
+        android:paddingBottom="15dp">
 
         <android.support.design.widget.TextInputLayout
+            style="@style/StyledTilEditText"
             android:id="@+id/txt_input_nomeUsuario"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="20dp"
-            android:layout_marginTop="241dp"
+            android:paddingTop="5dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             app:errorEnabled="true">
@@ -53,11 +55,12 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
+            style="@style/StyledTilEditText"
             android:id="@+id/txt_input_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="20dp"
-            android:layout_marginTop="299dp"
+            android:paddingTop="10dp"
+            android:layout_marginTop="60dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             app:errorEnabled="true">
@@ -79,11 +82,12 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
+            style="@style/StyledTilEditText"
             android:id="@+id/txt_input_senha"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="20dp"
-            android:layout_marginTop="360dp"
+            android:layout_marginTop="110dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             app:errorEnabled="true"
@@ -110,22 +114,34 @@
             android:id="@+id/btn_entrar"
             android:layout_width="match_parent"
             android:layout_height="52dp"
-            android:layout_marginTop="450dp"
+            android:layout_marginTop="210dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:background="@drawable/inscrever_criar_conta_btn"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/buttonshape"
+            android:text="Criar Conta"
+            android:textAlignment="center"
+            android:textSize="30dp"
+            android:textAllCaps="false"
             android:onClick="cadastrarUsuario"
            />
+
         <Button
             android:id="@+id/btn_registrar"
             android:layout_width="match_parent"
             android:layout_height="52dp"
-            android:layout_marginTop="510dp"
+            android:text="Entrar"
+            android:textColor="#1c8adb"
+            android:textAllCaps="false"
+            android:textAlignment="center"
+            android:textSize="30dp"
+            android:layout_marginTop="270dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
-            android:background="@drawable/inscrever_entrar_btn"
+            android:background="@drawable/buttonshape2"
             android:onClick="openLogin"
             />
+
     </RelativeLayout>
 
 

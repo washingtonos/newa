@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#26A69A"
+    android:background="#1c8adb"
     tools:context=".CadastrarComodoActivity">
 
     <RelativeLayout
@@ -14,9 +14,10 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:paddingBottom="20dp"
-        android:background="@color/colorButton"
+        android:background="#ffff"
         >
         <android.support.design.widget.TextInputLayout
+            style="@style/StyledTilEditText"
             android:id="@+id/txt_input_nomeComodo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,6 +44,7 @@
             android:textAllCaps="false"
             android:text="Cadastrar Comodo"
             android:background="@drawable/buttonshape"
+            android:textColor="#ffff"
             android:layout_marginTop="10dp"
             android:onClick="cadastrarComodo"
             />

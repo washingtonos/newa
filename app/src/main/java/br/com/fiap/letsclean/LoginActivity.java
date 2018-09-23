@@ -141,6 +141,7 @@ public class LoginActivity extends Activity {
 
             if(txt_input_emailLogin.getEditText().getText().toString().equals(us.getEmail()) && txt_input_senhaLogin.getEditText().getText().toString().equals(us.getSenha())){
                 Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
+                intent.putExtra("nomeUser",us.getNome().toString());
                 intent.putExtra("userId", us.getId().toString());
                 intent.putExtra("userId2", us.getId());
                 if(us.getGrupoId() != null){
@@ -148,6 +149,7 @@ public class LoginActivity extends Activity {
                     intent.putExtra("grupoId", us.getGrupoId());
                 }
                 startActivity(intent);
+                finish();
 
             } else {
                 final AlertDialog.Builder alert = new AlertDialog.Builder(LoginActivity.this);

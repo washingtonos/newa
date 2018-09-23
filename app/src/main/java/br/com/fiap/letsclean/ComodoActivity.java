@@ -60,6 +60,7 @@ public class ComodoActivity extends AppCompatActivity {
                         intent.putExtra("userId2", userId2);
                         intent.putExtra("grupoId", grupoId);
                         startActivity(intent);
+                        finish();
                     }
                     else{
                         final AlertDialog.Builder builder = new AlertDialog.Builder(ComodoActivity.this);

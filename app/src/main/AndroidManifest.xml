@@ -13,7 +13,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
@@ -35,15 +35,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".CadastroGrupoActivity"
-            android:label="Cadastrar Grupo"
-            android:theme="@style/AppTheme1" />
         <activity android:name=".LoginActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".GettingstartedActivity" />
         </activity>
+        <activity
+            android:name=".CadastroGrupoActivity"
+            android:label="Cadastrar Grupo"
+            android:theme="@style/AppTheme1" />
+        <activity
+            android:name=".CadastrarComodoActivity"
+            android:label="Cadastrar Comodo"
+            android:theme="@style/AppTheme1" />
         <activity android:name=".GrupoActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -54,7 +58,6 @@
         <activity android:name=".RegistrarActivity" />
         <activity android:name=".Grupo_Detalhe" />
         <activity android:name=".ComodoActivity" />
-        <activity android:name=".CadastrarComodoActivity" />
         <activity android:name=".ComodoDetalheActivity" />
         <activity
             android:name=".CadastrarAtividadeActivity"
@@ -62,7 +65,12 @@
             android:theme="@style/AppTheme1" />
         <activity android:name=".AtividadeActivity" />
         <activity android:name=".AddIntegranteActivity" />
-        <activity android:name=".AtividadeDetalheActivity"></activity>
+        <activity android:name=".AtividadeDetalheActivity" />
+        <activity android:name=".Atividade2Activity" />
+        <activity android:name=".ValidarAtividadeActivity" />
+        <activity android:name=".RelatorioActivity" />
+        <activity android:name=".AtividadeConcluidasActivity" />
+        <activity android:name=".AtividadesPendentesActivity"></activity>
     </application>
 
 </manifest>

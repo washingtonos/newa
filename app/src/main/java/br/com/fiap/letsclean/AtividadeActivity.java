@@ -31,10 +31,10 @@ import br.com.fiap.letsclean.entity.Atividade;
 public class AtividadeActivity extends AppCompatActivity {
 
     //the recyclerview
-    private Long admUser,grupoId,userId2,param;
+    private Long admUser,grupoId,userId2;
     private RecyclerView recyclerView;
     private Button btn_cadastrar_atividade;
-    String urlS;
+    private String nomeUser;
     private List<Atividade> atividades;
 
     @Override
@@ -51,6 +51,7 @@ public class AtividadeActivity extends AppCompatActivity {
             userId2 = extras.getLong("userId2");
             admUser = extras.getLong("admUser");
             grupoId = extras.getLong("grupoId");
+            nomeUser = extras.getString("nomeUser");
         }
 
         btn_cadastrar_atividade.setOnClickListener(new View.OnClickListener() {
@@ -62,7 +63,9 @@ public class AtividadeActivity extends AppCompatActivity {
                             Intent intent = new Intent(AtividadeActivity.this,CadastrarAtividadeActivity.class);
                             intent.putExtra("userId2",userId2);
                             intent.putExtra("grupoId", grupoId);
+                            intent.putExtra("admUser", admUser);
                             startActivity(intent);
+                            finish();
                         }
                         else{
                             final AlertDialog.Builder builder = new AlertDialog.Builder(AtividadeActivity.this);
@@ -172,18 +175,25 @@ public class AtividadeActivity extends AppCompatActivity {
                         atividade.setGrupoId(grupoId);
                         atividade.setComodoId(comodoId);
                         atividade.setStatus(status);
+                        atividade.setNomeResponsavel(nomeUser);
+                        atividade.setAdmUser(admUser);
                         atividades.add(atividade);
                     }
 
                     if(!atividades.isEmpty()){
+                        List<Atividade> atividadesPendentes = new ArrayList<>();
                         for ( int i=0; i < atividades.size(); i++){
                             if(atividades.get(i).getStatus() == Long.valueOf(0)){
                                 //creating recyclerview adapter
-                                AtividadeAdapter adapter = new AtividadeAdapter(AtividadeActivity.this, (ArrayList<Atividade>) atividades);
-                                //setting adapter to recyclerview
-                                recyclerView.setAdapter(adapter);
+                                atividadesPendentes.add(atividades.get(i));
                             }
                         }
+
+                        AtividadeAdapter adapter = new AtividadeAdapter(AtividadeActivity.this, (ArrayList<Atividade>) atividadesPendentes);
+                        //setting adapter to recyclerview
+                        recyclerView.setAdapter(adapter);
+
+                        // Fazer um Alert com todas  atividades concluidas
                     }
 
                 }catch (JSONException e){

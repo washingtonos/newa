@@ -7,7 +7,7 @@ import android.view.View;
 
 public class MenuActivity extends AppCompatActivity {
 
-    private String userId;
+    private String userId, nomeUser;
     private Long admUser,grupoId, userId2;
 
     @Override
@@ -22,6 +22,7 @@ public class MenuActivity extends AppCompatActivity {
             userId2 = extras.getLong("userId2");
             admUser = extras.getLong("admUser");
             grupoId = extras.getLong("grupoId");
+            nomeUser = extras.getString("nomeUser");
         }
     }
 
@@ -44,8 +45,21 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void atividade(View view) {
-        Intent intent = new Intent(this, AtividadeActivity.class);
+        Intent intent = new Intent(this, Atividade2Activity.class);
         intent.putExtra("userId", userId);
+        intent.putExtra("nomeUser", nomeUser);
+        if(grupoId != null){
+            intent.putExtra("admUser", admUser);
+            intent.putExtra("grupoId", grupoId);
+            intent.putExtra("userId2", userId2);
+        }
+        startActivity(intent);
+    }
+
+    public void relatorio(View view) {
+        Intent intent = new Intent(this, RelatorioActivity.class);
+        intent.putExtra("userId", userId);
+        intent.putExtra("nomeUser", nomeUser);
         if(grupoId != null){
             intent.putExtra("admUser", admUser);
             intent.putExtra("grupoId", grupoId);

@@ -8,11 +8,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -83,21 +79,6 @@ public class CadastroGrupoActivity extends AppCompatActivity {
             CadastraGrupoTask task = new CadastraGrupoTask();
             task.execute(grupo);
         }
-    }
-
-    private void showToast() {
-        LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.custom_toast,
-                (ViewGroup) findViewById(R.id.custom_toast_container));
-
-        TextView text = (TextView) layout.findViewById(R.id.text);
-        text.setText("Grupo cadastrado com Sucesso");
-
-        Toast toast = new Toast(getApplicationContext());
-        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-        toast.setDuration(Toast.LENGTH_LONG);
-        toast.setView(layout);
-        toast.show();
     }
 
     private class CadastraGrupoTask extends AsyncTask<Grupo,Void,Integer>{
@@ -173,6 +154,7 @@ public class CadastroGrupoActivity extends AppCompatActivity {
         Intent intent = new Intent(CadastroGrupoActivity.this, GrupoActivity.class);
         intent.putExtra("grupoId", grupoId);
         startActivity(intent);
+        finish();
     }
 
     private class BuscarGrupo extends AsyncTask<String,Void,String>{

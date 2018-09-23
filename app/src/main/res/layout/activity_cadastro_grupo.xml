@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_login"
+    android:background="#1c8adb"
     tools:context=".CadastroGrupoActivity">
 
     <RelativeLayout
@@ -17,6 +17,7 @@
         android:background="@color/colorButton"
         >
         <android.support.design.widget.TextInputLayout
+            style="@style/StyledTilEditText"
             android:id="@+id/txt_input_nome"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -34,6 +35,7 @@
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
+            style="@style/StyledTilEditText"
             android:id="@+id/txt_input_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -58,6 +60,7 @@
             android:layout_below="@id/txt_input_desc"
             android:textAllCaps="false"
             android:text="Cadastrar Grupo"
+            android:textColor="#FFFF"
             android:background="@drawable/buttonshape"
             android:layout_marginTop="10dp"
             android:onClick="cadastrarGrupo"

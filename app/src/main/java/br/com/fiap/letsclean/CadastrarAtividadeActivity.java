@@ -31,7 +31,7 @@ import cz.msebera.android.httpclient.Header;
 
 public class CadastrarAtividadeActivity extends AppCompatActivity {
 
-    private Long grupoId, userId2, userAtividade, idComodo;
+    private Long grupoId, userId2, userAtividade, idComodo, admUser;
     private ArrayList<Comodo> listComodo;
     private ArrayList<Usuario> listUsuario;
     TextInputLayout txt_input_nomeAtividade, txt_input_descAtividade;
@@ -48,6 +48,7 @@ public class CadastrarAtividadeActivity extends AppCompatActivity {
         if(extras!=null){
             userId2 = extras.getLong("userId2");
             grupoId = extras.getLong("grupoId");
+            admUser = extras.getLong("admUser");
         }
         txt_input_nomeAtividade = findViewById(R.id.txt_input_nomeAtividade);
         txt_input_descAtividade = findViewById(R.id.txt_input_descAtividade);
@@ -164,7 +165,9 @@ public class CadastrarAtividadeActivity extends AppCompatActivity {
         Intent intent = new Intent(CadastrarAtividadeActivity.this, AtividadeActivity.class);
         intent.putExtra("grupoId", grupoId);
         intent.putExtra("userId2",userId2);
+        intent.putExtra("admUser",admUser);
         startActivity(intent);
+        finish();
     }
 
     /*

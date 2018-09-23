@@ -13,10 +13,11 @@
         />
     <Button
         android:id="@+id/btn_cadastrar_comodo"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="131dp"
-        android:background="@drawable/group"
+        android:textColor="#FFFF"
+        android:background="@drawable/buttonshape"
         android:text="Cadastrar Comodo"
         android:textSize="15dp"
         android:textAllCaps="false"

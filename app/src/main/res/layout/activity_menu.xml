@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content" />
             <ImageView
                 android:layout_alignParentRight="true"
-                android:src="@drawable/user3"
+                android:src="@drawable/person_640"
                 android:layout_width="62dp"
                 android:layout_height="62dp" />
 
@@ -62,7 +62,7 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:src="@drawable/baseline_person_black_18dp"
+                        android:src="@drawable/group_640"
                         android:layout_width="80dp"
                         android:layout_height="80dp" />
 
@@ -97,7 +97,7 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:src="@drawable/baseline_person_black_18dp"
+                        android:src="@drawable/pen_640"
                         android:layout_width="80dp"
                         android:layout_height="80dp" />
 
@@ -120,7 +120,7 @@
                 app:cardMaxElevation="6dp"
                 app:cardCornerRadius="12dp"
                 android:layout_margin="12dp"
-                >
+                android:onClick="relatorio">
 
                 <LinearLayout
                     android:orientation="vertical"
@@ -130,12 +130,12 @@
                     android:layout_height="match_parent">
 
                     <ImageView
-                        android:src="@drawable/baseline_person_black_18dp"
+                        android:src="@drawable/statistics_640"
                         android:layout_width="80dp"
                         android:layout_height="80dp" />
 
                     <TextView
-                        android:text="Pontuação"
+                        android:text="Relatorios"
                         android:layout_marginTop="12dp"
                         android:textColor="#6f6f6f6f"
                         android:textSize="18sp"
@@ -164,7 +164,7 @@
                     android:onClick="comodo">
 
                     <ImageView
-                        android:src="@drawable/baseline_person_black_18dp"
+                        android:src="@drawable/home_640"
                         android:layout_width="80dp"
                         android:layout_height="80dp" />
 

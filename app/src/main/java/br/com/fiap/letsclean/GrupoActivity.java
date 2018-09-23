@@ -60,6 +60,7 @@ public class GrupoActivity extends AppCompatActivity {
                         Intent intent = new Intent(GrupoActivity.this,CadastroGrupoActivity.class);
                         intent.putExtra("userId",userId);
                         startActivity(intent);
+                        finish();
                     }
                     else{
                         final AlertDialog.Builder builder = new AlertDialog.Builder(GrupoActivity.this);

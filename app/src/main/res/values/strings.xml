@@ -143,4 +143,5 @@
     <string name="logo_img_st">logo</string>
     <string name="title_activity_sobre">SobreActivity</string>
     <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_atividades_pendentes">AtividadesPendentesActivity</string>
 </resources>

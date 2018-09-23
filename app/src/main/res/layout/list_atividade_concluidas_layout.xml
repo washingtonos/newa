@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <android.support.v7.widget.CardView
+        android:background="@drawable/borda_arredondada"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:paddingBottom="8dp"
+            android:background="#1c8adb">
+
+
+            <TextView
+                android:id="@+id/txtNome"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="atividade 1"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="#FFFF"
+                android:textSize="20dp"/>
+
+            <TextView
+                android:layout_marginTop="30dp"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/txtDesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Desc Atividade"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="#FFFF"
+                android:textSize="15dp"/>
+
+            <TextView
+                android:layout_marginTop="60dp"
+                android:layout_marginLeft="10dp"
+                android:id="@+id/txtObs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Obs Atividade"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                android:textColor="#FFFF"
+                android:textSize="15dp"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

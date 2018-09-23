@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class Grupo_Detalhe extends AppCompatActivity {
 
-    private  String nome;
+    private String nome;
     private Long  userId,grupoId;
+    private TextView txt_nomeGrupo;
     private Button btn_add_integrante;
 
     @Override
@@ -24,8 +26,10 @@ public class Grupo_Detalhe extends AppCompatActivity {
             userId = extras.getLong("userId");
             grupoId = extras.getLong("grupoId");
         }
-
+        txt_nomeGrupo = findViewById(R.id.txt_nomeGrupo);
         btn_add_integrante = findViewById(R.id.btn_add_integrante);
+
+        txt_nomeGrupo.setText(nome.toString());
      }
 
     public void openDialogCadastrar(View view) {
@@ -33,5 +37,6 @@ public class Grupo_Detalhe extends AppCompatActivity {
         intent.putExtra("userId", userId);
         intent.putExtra("grupoId", grupoId);
         startActivity(intent);
+        finish();
     }
 }
