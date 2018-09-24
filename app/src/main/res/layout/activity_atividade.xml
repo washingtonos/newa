@@ -7,11 +7,27 @@
     tools:context=".AtividadeActivity">
 
     <RelativeLayout
-        android:layout_marginTop="110dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <ImageView
+            android:layout_margin="25dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/pen_640"/>
+
+        <TextView
+            android:layout_marginTop="35dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Title"
+            android:textColor="#1c8adb"
+            android:textSize="30dp"
+            android:text="Atividades"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
         <Button
+            android:layout_marginTop="110dp"
             android:id="@+id/btn_cadastrar_atividade"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -24,7 +40,7 @@
             />
 
         <RelativeLayout
-            android:layout_marginTop="55dp"
+            android:layout_marginTop="165dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             >

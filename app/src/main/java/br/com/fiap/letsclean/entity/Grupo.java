@@ -3,6 +3,7 @@ package br.com.fiap.letsclean.entity;
 public class Grupo{
 
 	private Long id;
+	private Long idAntigo;
 	private String nome;
 	private String descricao;
 	private Long admUser;
@@ -13,8 +14,9 @@ public class Grupo{
 	public Grupo() {
 	}
 
-	public Grupo(Long id, String nome, String descricao, Long admUser, Long userId, Long comodoId, Long atividadeId) {
+	public Grupo(Long id, Long idAntigo, String nome, String descricao, Long admUser, Long userId, Long comodoId, Long atividadeId) {
 		this.id = id;
+		this.idAntigo = idAntigo;
 		this.nome = nome;
 		this.descricao = descricao;
 		this.admUser = admUser;
@@ -29,6 +31,14 @@ public class Grupo{
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public Long getIdAntigo() {
+		return idAntigo;
+	}
+
+	public void setIdAntigo(Long idAntigo) {
+		this.idAntigo = idAntigo;
 	}
 
 	public String getNome() {

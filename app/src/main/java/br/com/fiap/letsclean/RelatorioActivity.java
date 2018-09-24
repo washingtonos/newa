@@ -36,6 +36,7 @@ public class RelatorioActivity extends AppCompatActivity {
             intent.putExtra("userId2", userId2);
         }
         startActivity(intent);
+        finish();
     }
 
     public void pendentes(View view) {
@@ -48,6 +49,7 @@ public class RelatorioActivity extends AppCompatActivity {
             intent.putExtra("userId2", userId2);
         }
         startActivity(intent);
+        finish();
     }
 
 }

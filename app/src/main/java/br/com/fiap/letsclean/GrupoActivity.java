@@ -59,6 +59,7 @@ public class GrupoActivity extends AppCompatActivity {
                     if(grupoId == Long.valueOf(0)){
                         Intent intent = new Intent(GrupoActivity.this,CadastroGrupoActivity.class);
                         intent.putExtra("userId",userId);
+                        intent.putExtra("grupoId", grupoId);
                         startActivity(intent);
                         finish();
                     }
@@ -102,6 +103,7 @@ public class GrupoActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... strings) {
             try {
+
                 URL url = new URL("http://www.letscleanof.com/api/grupos/"+grupoId);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");

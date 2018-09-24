@@ -40,6 +40,7 @@ public class CadastroGrupoActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if(extras!=null){
             userId = extras.getString("userId");
+            grupoId = extras.getLong("grupoId");
             userIdL = userIdL.valueOf(userId);
         }
     }

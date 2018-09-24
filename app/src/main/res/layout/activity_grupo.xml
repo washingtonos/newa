@@ -1,42 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context=".GrupoActivity">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/action_bar_group"/>
-
-
-    <Button
-        android:id="@+id/btn_cadastrar_grupo"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="131dp"
-        android:textColor="#FFFF"
-        android:background="@drawable/buttonshape"
-        android:text="Cadastrar Grupo"
-        android:textSize="15dp"
-        android:textAllCaps="false"
-        android:layout_centerHorizontal="true"
-        />
 
     <RelativeLayout
-        android:layout_marginTop="200dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_margin="25dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/group_640"/>
+
+        <TextView
+            android:layout_marginTop="35dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Title"
+            android:textColor="#1c8adb"
+            android:textSize="30dp"
+            android:text="Grupos"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btn_cadastrar_grupo"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="110dp"
+            android:textColor="#FFFF"
+            android:background="@drawable/buttonshape"
+            android:text="Cadastrar Grupo"
+            android:textSize="15dp"
+            android:textAllCaps="false"
+            android:layout_centerHorizontal="true"
+            />
+
+        <RelativeLayout
+            android:layout_marginTop="165dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            />
+            >
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+        </RelativeLayout>
+
     </RelativeLayout>
 
-</RelativeLayout>
+</ScrollView>

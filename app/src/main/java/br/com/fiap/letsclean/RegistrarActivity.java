@@ -93,6 +93,7 @@ public class RegistrarActivity extends AppCompatActivity {
                 jsonParamsGrupo.put("senha",usuarios[0].getSenha());
                 jsonParamsGrupo.put("admUser",usuarios[0].getAdmUser().toString());
                 jsonParamsGrupo.put("grupoId",usuarios[0].getAdmUser().toString());
+                jsonParamsGrupo.put("grupoIdAntigo",usuarios[0].getAdmUser().toString());
                 jsonParamsGrupo.put("comodoId",usuarios[0].getAdmUser().toString());
 
                 OutputStreamWriter osw = new OutputStreamWriter(connection.getOutputStream());
@@ -141,6 +142,7 @@ public class RegistrarActivity extends AppCompatActivity {
     public void openLogin(View view) {
         Intent intent = new Intent(RegistrarActivity.this, LoginActivity.class);
         startActivity(intent);
+        finish();
     }
 
     private void limparActivity() {

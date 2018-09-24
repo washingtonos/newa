@@ -4,25 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#1c8adb"
     tools:context=".Atividade2Activity">
 
-    <Button
-        android:id="@+id/btnAtividades"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="atividade"
-        android:text="Atividades"
-        android:layout_centerInParent="true"
-        tools:layout_editor_absoluteX="154dp"
-        tools:layout_editor_absoluteY="124dp"
-        />
+    <RelativeLayout
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/buttonshape2"
+        android:paddingBottom="20dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content">
 
-    <Button
-        android:id="@+id/btnAtividadesValidar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="atividadeValidar"
-        android:text="Atividades a Validar"
-        tools:layout_editor_absoluteX="117dp"
-        tools:layout_editor_absoluteY="214dp" />
+        <Button
+            android:id="@+id/btnAtividades"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:onClick="atividade"
+            android:textColor="#FFF"
+            android:text="Atividades"
+            android:background="@drawable/buttonshape"
+            android:layout_centerHorizontal="true"
+            />
+
+        <Button
+            android:id="@+id/btnAtividadesValidar"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="75dp"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            android:textColor="#1c8adb"
+            android:onClick="atividadeValidar"
+            android:background="@drawable/buttonshape2"
+            android:text="Atividades a Validar"
+            />
+
+    </RelativeLayout>
+
+
 </RelativeLayout>

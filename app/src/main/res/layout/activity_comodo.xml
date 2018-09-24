@@ -6,34 +6,51 @@
     android:layout_height="match_parent"
     tools:context=".ComodoActivity">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="125dp"
-        android:background="@drawable/action_bar_comodo"
-        />
-    <Button
-        android:id="@+id/btn_cadastrar_comodo"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="131dp"
-        android:textColor="#FFFF"
-        android:background="@drawable/buttonshape"
-        android:text="Cadastrar Comodo"
-        android:textSize="15dp"
-        android:textAllCaps="false"
-        android:layout_centerHorizontal="true"
-        />
-
     <RelativeLayout
-        android:layout_marginTop="200dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_margin="25dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/home_640"/>
+
+        <TextView
+            android:layout_marginTop="35dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Title"
+            android:textColor="#1c8adb"
+            android:textSize="30dp"
+            android:text="Comodos"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btn_cadastrar_comodo"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="110dp"
+            android:textColor="#FFFF"
+            android:background="@drawable/buttonshape"
+            android:text="Cadastrar Comodo"
+            android:textSize="15dp"
+            android:textAllCaps="false"
+            android:layout_centerHorizontal="true"/>
+
+        <RelativeLayout
+            android:layout_marginTop="165dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            />
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </RelativeLayout>
+
     </RelativeLayout>
+
 
 </RelativeLayout>

@@ -6,26 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".ValidarAtividadeActivity">
 
-    <ImageView
-        android:layout_marginLeft="30dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@drawable/checklist_checkmark_clipboard_document_list_tracklist_icon_128" />
-
     <RelativeLayout
-        android:layout_marginTop="130dp"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
+        <ImageView
+            android:layout_margin="20dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:background="@drawable/checklist128"/>
+
+        <TextView
+            android:layout_marginTop="35dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.SearchResult.Title"
+            android:textColor="#1c8adb"
+            android:textSize="30dp"
+            android:text="Validar Atividades"
+            android:layout_marginLeft="100dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
         <RelativeLayout
+            android:layout_marginTop="130dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerView"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                />
+                >
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
+            </RelativeLayout>
+
         </RelativeLayout>
 
     </RelativeLayout>

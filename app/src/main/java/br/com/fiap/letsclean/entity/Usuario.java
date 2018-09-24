@@ -9,12 +9,15 @@ public class Usuario {
 	private Long admUser;
 	private Long atividadeId;
 	private Long grupoId;
+	private Long grupoIdAntigo;
 	private Long comodoId;
+	private String nomeGrupo;
+	private String conviteAceito;
 
 	public Usuario() {
 	}
 
-	public Usuario(Long id, String nome, String email, String senha, Long admUser, Long atividadeId, Long grupoId, Long comodoId) {
+	public Usuario(Long id, String nome, String email, String senha, Long admUser, Long atividadeId, Long grupoId, Long grupoIdAntigo, Long comodoId, String nomeGrupo, String conviteAceito) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
@@ -22,7 +25,10 @@ public class Usuario {
 		this.admUser = admUser;
 		this.atividadeId = atividadeId;
 		this.grupoId = grupoId;
+		this.grupoIdAntigo = grupoIdAntigo;
 		this.comodoId = comodoId;
+		this.nomeGrupo = nomeGrupo;
+		this.conviteAceito = conviteAceito;
 	}
 
 	public Long getId() {
@@ -81,6 +87,14 @@ public class Usuario {
 		this.grupoId = grupoId;
 	}
 
+	public Long getGrupoIdAntigo() {
+		return grupoIdAntigo;
+	}
+
+	public void setGrupoIdAntigo(Long grupoIdAntigo) {
+		this.grupoIdAntigo = grupoIdAntigo;
+	}
+
 	public Long getComodoId() {
 		return comodoId;
 	}
@@ -89,8 +103,24 @@ public class Usuario {
 		this.comodoId = comodoId;
 	}
 
+	public String getNomeGrupo() {
+		return nomeGrupo;
+	}
+
+	public void setNomeGrupo(String nomeGrupo) {
+		this.nomeGrupo = nomeGrupo;
+	}
+
+	public String getConviteAceito() {
+		return conviteAceito;
+	}
+
+	public void setConviteAceito(String conviteAceito) {
+		this.conviteAceito = conviteAceito;
+	}
+
 	@Override
 	public String toString() {
-		return nome;
+		return nome.toString();
 	}
 }

@@ -18,6 +18,7 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -29,6 +30,7 @@ public class LoginActivity extends Activity {
     private TextInputLayout txt_input_emailLogin, txt_input_senhaLogin;
     private boolean userEtIsEmpty;
     private boolean passwordEtIsEmpty;
+    private Usuario us = new Usuario();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,14 +116,18 @@ public class LoginActivity extends Activity {
                         String senha = jsonResponse.getString("senha");
                         Long admUser = jsonResponse.getLong("admUser");
                         Long grupoId = jsonResponse.getLong("grupoId");
+                        Long grupoIdAntigo = jsonResponse.getLong("grupoIdAntigo");
+                        String nomeGrupo = jsonResponse.getString("nomeGrupo");
+
                         // Instanciando um Grupo e add na lista
-                        Usuario us = new Usuario();
                         us.setId(cod);
                         us.setNome(nome);
                         us.setEmail(email);
                         us.setSenha(senha);
                         us.setAdmUser(admUser);
                         us.setGrupoId(grupoId);
+                        us.setGrupoIdAntigo(grupoIdAntigo);
+                        us.setNomeGrupo(nomeGrupo);
 
                         validarUser(us);
 
@@ -138,18 +144,21 @@ public class LoginActivity extends Activity {
 
     private void validarUser(Usuario us) {
         if(us != null){
-
             if(txt_input_emailLogin.getEditText().getText().toString().equals(us.getEmail()) && txt_input_senhaLogin.getEditText().getText().toString().equals(us.getSenha())){
-                Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
-                intent.putExtra("nomeUser",us.getNome().toString());
-                intent.putExtra("userId", us.getId().toString());
-                intent.putExtra("userId2", us.getId());
-                if(us.getGrupoId() != null){
-                    intent.putExtra("admUser", us.getAdmUser());
-                    intent.putExtra("grupoId", us.getGrupoId());
+
+                // Usuario Novo
+                if(us.getGrupoId() == Long.valueOf(0) && us.getGrupoIdAntigo() == Long.valueOf(0)) {
+                    openDialog();
                 }
-                startActivity(intent);
-                finish();
+                //User Não é (ADM)
+                if(us.getAdmUser() == Long.valueOf(0)){
+                    // Verificar a existencia de um convite para grupo
+                    validaConvite(us.getGrupoId(), us.getGrupoIdAntigo(), us.getNomeGrupo());
+                }
+                // Usuario que já tem grupo (ADM)
+                else {
+                    openDialog();
+                }
 
             } else {
                 final AlertDialog.Builder alert = new AlertDialog.Builder(LoginActivity.this);
@@ -167,6 +176,36 @@ public class LoginActivity extends Activity {
                 alert.show();
             }
 
+        }
+    }
+
+    private void validaConvite(final Long grupoId, final Long grupoIdAntigo, String nomeGrupo) {
+        if(grupoId != grupoIdAntigo){
+
+            final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(LoginActivity.this);
+            builder.setTitle("Convite")
+                    .setIcon(R.drawable.letters_640)
+                    .setMessage("Você recebeu um convite para participar de um novo grupo, " +
+                            "Grupo: "+nomeGrupo.toString()+ " Deseja participar?")
+
+                    .setPositiveButton("Participar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            us.setConviteAceito("SIM");
+                            LoginActivity.AtualizarUsuarioTask task = new LoginActivity.AtualizarUsuarioTask();
+                            task.execute(us);
+                        }
+                    })
+                    .setNegativeButton("Não", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            us.setConviteAceito("NAO");
+                            LoginActivity.AtualizarUsuarioTask task = new LoginActivity.AtualizarUsuarioTask();
+                            task.execute(us);
+                        }
+                    });
+
+            builder.show();
         }
     }
 
@@ -201,5 +240,70 @@ public class LoginActivity extends Activity {
             userEtIsEmpty=true;
             passwordEtIsEmpty=true;
         }
+    }
+
+    private class AtualizarUsuarioTask extends AsyncTask<Usuario,Void,Integer> {
+
+        @Override
+        protected Integer doInBackground(Usuario... usuarios) {
+            try{
+                URL url = new URL("http://www.letscleanof.com/api/usuario/grupo/convidado");
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("PUT");
+                connection.setRequestProperty("Content-Type", "application/json");
+
+                JSONObject jsonParamsUsuario = new JSONObject();
+                jsonParamsUsuario.put("id",usuarios[0].getId());
+                jsonParamsUsuario.put("conviteAceito",usuarios[0].getConviteAceito().toString());
+                jsonParamsUsuario.put("grupoId",usuarios[0].getGrupoId());
+                jsonParamsUsuario.put("grupoIdAntigo",usuarios[0].getGrupoIdAntigo());
+
+                OutputStreamWriter osw = new OutputStreamWriter(connection.getOutputStream());
+                osw.write(jsonParamsUsuario.toString());
+                osw.close();
+
+                return connection.getResponseCode();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Integer integer) {
+
+            if(integer == 200 || integer == 201){
+                openDialog();
+            } if (integer == 404){
+                Toast.makeText(LoginActivity.this, "Tente Novamente mais tarde", Toast.LENGTH_LONG).show();
+            }
+            if (integer == 500){
+                Toast.makeText(LoginActivity.this, "Internal Server Error", Toast.LENGTH_LONG).show();
+            }
+        }
+
+    }
+
+    private void openDialog() {
+        final android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
+        builder.setTitle(us.getNome().toString())
+                .setMessage("Bem vindo!")
+                .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Start Intent Menu
+                        Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
+                        intent.putExtra("nomeUser",us.getNome().toString());
+                        intent.putExtra("userId", us.getId().toString());
+                        intent.putExtra("userId2", us.getId());
+                        intent.putExtra("admUser", us.getAdmUser());
+                        intent.putExtra("grupoId", us.getGrupoId());
+                        startActivity(intent);
+                        finish();
+
+                        dialog.dismiss();
+                    }
+                });
+        builder.show();
     }
 }
